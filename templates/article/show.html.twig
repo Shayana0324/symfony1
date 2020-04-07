@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>{{ articles }}</h1> 
+
+
+<div>
+creating articles
+</div>
+
+<h2>Items ({{items | length}})</h2>
+<ul>
+{% for item in items %}
+<li> {{ item }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
