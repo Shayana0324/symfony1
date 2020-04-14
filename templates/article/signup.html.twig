@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <div class="b"><b> Create your account! </b></div>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+    </head>
+<style>
+         div.a{
+    line-height: 1cm;
+    text-align: center;
+}
+ div.b{
+     line-height:2cm;
+     text-align: center;
+     color: black;
+     font-family: Arial;
+     font-size:30px;
+ }
+</style>
+    <body>
+
+        {% block body %}
+       <div class="a">
+     <form class="form-control" method="POST" action="{{path("add_movie")}}">
+         Email:<input style="color:red;" type="text" name="email_id" id="E"> </br>
+         Password: <input type="text" name="password" id="P"></br>
+         <input type="submit" value="Sign Up" onclick="check_email()"> </br>
+
+        {% endblock %}
+    </body>
+    <script>
+    function check_email(){
+        var em=document.getElementById("E").value;
+        var atpos=em.indexOf("@");
+        var dtpos=em.lastIndexOf(".");
+        if (atpos>=1 && dtpos>2){
+            alert("Welcome");
+            }
+        else{
+            alert("Invalid Email");
+        }
+        
+    }
+    </script>
+    <body>
+    <div class="b">
+    <a href="/login">Login</a>
+    </div>
+    </body>
+
+</html>
+
+
+     

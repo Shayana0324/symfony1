@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Movie{% endblock %}
+
+{% block body %}
+<body class="mt-5 p-3 text-center">
+ {{ form_start(form) }}
+ {{ form_widget(form) }}
+ {{ form_end(form) }}
+ </body>
+{% endblock %}

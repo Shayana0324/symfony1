@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <div class="b"><b> Sign in! </b></div>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+    </head>
+<style>
+         div.a{
+    line-height: 1cm;
+    text-align: center;
+    font-family: Arial;
+    font-size:15px;
+}
+ div.b{
+     line-height:2cm;
+     text-align: center;
+     color: black;
+     font-family: Arial;
+     font-size:30px;
+ }
+</style>
+    <body>
+
+        {% block body %}
+       <div class="a">
+     <form class="form-control" method="POST" action="{{path("show_list")}}">
+         Email:<input style="color:red;" type="text" name="email_id" id="E"> </br>
+         Password: <input type="text" name="password" id="P"></br>
+         <input type="submit" value="LogIn"> </br>
+
+        {% endblock %}
+    </body>
+   
+</html>
+
+
+     

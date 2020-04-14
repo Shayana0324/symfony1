@@ -1,16 +1,11 @@
+  
 {% extends 'base.html.twig' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
 {% block body %}
-<h1>{{ articles }}</h1> 
-
-
-<div>
-creating articles
-</div>
-
-<h2>Items ({{items | length}})</h2>
-<ul>
-{% for item in items %}
-<li> {{ item }}</li>
-{% endfor %}
-</ul>
+ <h1>{{ movie.title }}</h1>
+ 
+ <hr>
+ <a href="/">Go Back</a>
 {% endblock %}
