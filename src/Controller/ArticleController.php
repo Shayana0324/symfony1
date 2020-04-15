@@ -21,18 +21,7 @@ class ArticleController extends AbstractController{
       */
       public function home(Request $request){
         $us_details=new UserDetails();
-      //   $form=$this->createFormBuilder($us_details)
-    
-      // ->getForm();
-  
-          $form->handleRequest($request);
-          if($form->isSubmitted() && $form->isValid()){
-  
-              $form->getData();
-              $entityManager=$this->getDoctrine()->getManager();
-              $entityManager->persist($us_details);
-              $entityManager->flush();
-          }
+     
         return $this->render('article/signup.html.twig');  
       
     }
