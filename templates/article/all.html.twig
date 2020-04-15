@@ -3,7 +3,7 @@
 {% block title %}Movies{% endblock %}
 
 {% block body %}
-  {% if articles %}
+  {% if movie %}
     <table id="movie_list" class="table table-striped">
       <thead>
         <tr>
@@ -12,9 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        {% for movie in movies %}
+        {% for movie in movie %}
           <tr>
-            <td>{{ movie.title }}</td>
+            <td>{{ movie.movie }}</td>
             <td>
               <a href="/article/{{ movie.id }}" class="btn btn-dark">Show</a>
               <a href="/article/edit/{{ movie.id }}" class="btn btn-light">Edit</a>

@@ -19,42 +19,56 @@ class ArticleController extends AbstractController{
       /**
       * @Route("/",name="homepage", methods={"GET","POST"})
       */
-      public function home(){
-          if(isset($_POST)){
-            $us_details=new UserDetails();
-              $email=$_POST["email"];
-              $pw=$_POST["password"];
-
+      public function home(Request $request){
+        $us_details=new UserDetails();
+      //   $form=$this->createFormBuilder($us_details)
+    
+      // ->getForm();
+  
+          $form->handleRequest($request);
+          if($form->isSubmitted() && $form->isValid()){
+  
+              $form->getData();
+              $entityManager=$this->getDoctrine()->getManager();
+              $entityManager->persist($us_details);
+              $entityManager->flush();
           }
         return $this->render('article/signup.html.twig');  
-      }
       
+    }
       /**
      * @Route("/signup/success", name="add_movie", methods={"GET","POST"})
      */
     public function movie(Request $request){
-        if(isset($_POST["email_id"])){
-        $u_details=new Details();
-        $form=$this->createFormBuilder($u_details)
-        ->add('movie',TextType::class,array('label'=>'Movie')) 
-        ->add('Add',SubmitType::class)
-        ->getForm();
+      $u_details=new Details();
+      $form=$this->createFormBuilder($u_details)
+    ->add('movie',TextType::class,array('label'=>'Movie')) 
+    ->add('Add',SubmitType::class)
+    ->getForm();
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+
             $form->getData();
             $entityManager=$this->getDoctrine()->getManager();
             $entityManager->persist($u_details);
             $entityManager->flush();
 
-            return $this->redirectToRoute('add');
-        }             
+            return $this->redirectToRoute('show_list');
+        }    
+        $movie = [
+          'id' => 1,
+          'title' => 'new movie'
+        ];
+        $new = [
+          'movie' => $movie
+        ];
+            
              return $this->render('article/movie.html.twig',array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'movie' => $new
                 )
              );
-
-    }
 }
   
     /**
@@ -69,9 +83,10 @@ class ArticleController extends AbstractController{
     */
     public function show(){
         if(isset($_POST["email"])){
-        $movie=$this->getDoctrine()->getRepository(Details::class)->findalAll();
+          return $this->redirectToRoute('show_list');
         }
-        return $this->render('article/all.html.twig',array('movies'=>$movie));
+        $movie=$this->getDoctrine()->getRepository(Details::class)->findAll();
+        return $this->render('article/all.html.twig',array('movie'=>$movie));
     }
 
     /**
@@ -113,20 +128,19 @@ class ArticleController extends AbstractController{
         return $this->render('article/show.html.twig', array('movie' => $u_details));
       }
 
-    /**
-     * @Route("/movie/delete/{id}")
-     * @Method({"DELETE"})
-     */
-    public function delete(Request $request, $id){
-        $u_details = $this->getDoctrine()->getRepository(Details::class)->find($id);
+    // /**
+    //  * @Route("/movie/delete/{id}", name="delete", methods={"DELETE})
+    //  */
+    // public function delete(Request $request, $id){
+    //     $u_details = $this->getDoctrine()->getRepository(Details::class)->find($id);
   
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($u_details);
-        $entityManager->flush();
+    //     $entityManager = $this->getDoctrine()->getManager();
+    //     $entityManager->remove($u_details);
+    //     $entityManager->flush();
   
-        $response = new Response();
-        $response->send();
-      }
+    //     $response = new Response();
+    //     $response->send();
+    //   }
 
     
 
